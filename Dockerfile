@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3-alpine3.6
 
 COPY internet_check.py /
 

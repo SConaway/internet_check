@@ -10,7 +10,7 @@ try:
 except:
     import http.client as httplib
 
-last_down = False
+
 
 def have_internet():
     conn = httplib.HTTPConnection("www.google.com", timeout=5)
@@ -25,6 +25,18 @@ def have_internet():
 def date():
     return datetime.datetime.now().strftime("%A, %m/%d/%Y %H:%M:%S")
 
+def minute():
+    return int(datetime.datetime.now().strftime("%M"))
+
+
+last_down = False
+
+while True:
+    if have_internet():
+        last_uptime = minute()
+        break
+
+
 while True:
     has_internet= have_internet()
 
@@ -32,6 +44,8 @@ while True:
         if last_down:
             print("Internet just went back online at", date())
             last_down = False
+            last_uptime = minute()
+
 
         time.sleep(1)
 
